@@ -24,6 +24,7 @@ const App: React.FC = () => {
       bundle: true,
       write: false,
       plugins: [unpkgPathPlugin()],
+      define: { "process.env.NODE_ENV": '"production"', global: "window" }, //double quotes replaces the value of NODE_ENV, not the parameter
     });
     console.log(result);
     setCode(result.outputFiles[0].text);
