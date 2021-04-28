@@ -34,6 +34,12 @@ const App: React.FC = () => {
     });
     console.log(result);
     setCode(result.outputFiles[0].text);
+    // We do not want that:
+    // try {
+    //   eval(result.outputFiles[0].text);
+    // } catch (error) {
+    //   alert(error);
+    // }
   };
   return (
     <>
@@ -42,6 +48,7 @@ const App: React.FC = () => {
         <button onClick={onClick}>Submit</button>
       </div>
       <pre>{code}</pre>
+      <iframe src='/test.html' sandbox='allow-same-origin' />
     </>
   );
 };
