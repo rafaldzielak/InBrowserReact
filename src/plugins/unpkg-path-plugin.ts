@@ -18,7 +18,6 @@ export const unpkgPathPlugin = () => {
         path: `https://unpkg.com/${args.path}`,
         namespace: "a",
       }));
-      console.log("AAA");
     },
   };
 };
