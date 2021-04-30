@@ -1,8 +1,10 @@
+import "bulmaswatch/superhero/bulmaswatch.min.css";
 import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import * as esbuild from "esbuild-wasm";
 import { unpkgPathPlugin } from "./plugins/unpkg-path-plugin";
 import { fetchPlugin } from "./plugins/fetch-plugin";
+import CodeEditor from "./components/code-editor";
 
 const App: React.FC = () => {
   const [input, setInput] = useState(`import 'bulma/css/bulma.css';
@@ -34,7 +36,6 @@ const App: React.FC = () => {
       define: { "process.env.NODE_ENV": '"production"', global: "window" }, //double quotes replaces the value of NODE_ENV, not the parameter
     });
     console.log(result);
-    // setCode(result.outputFiles[0].text);
     // We do not want that:
     // try {
     //   eval(result.outputFiles[0].text);
@@ -69,6 +70,7 @@ const App: React.FC = () => {
   `;
   return (
     <>
+      <CodeEditor initialValue='console.log(1)' onChange={(value) => setInput(value)} />
       <textarea value={input} onChange={(e) => setInput(e.target.value)}></textarea>
       <div>
         <button onClick={onClick}>Submit</button>
