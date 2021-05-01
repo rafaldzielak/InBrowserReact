@@ -9,10 +9,12 @@ const CodeCell: React.FC = () => {
   import React from 'react'; 
   console.log(React);`);
   const [code, setCode] = useState("");
+  const [error, setError] = useState("");
   useEffect(() => {
     const timer = setTimeout(async () => {
       const output = await bundle(input);
-      setCode(output);
+      setCode(output.code);
+      setError(output.err);
     }, 1000);
     return () => clearTimeout(timer);
   }, [input]);
@@ -27,7 +29,7 @@ const CodeCell: React.FC = () => {
         {/* <div>
         <button onClick={onClick}>Submit</button>
       </div> */}
-        <PreviewComponent code={code} />
+        <PreviewComponent code={code} error={error} />
       </div>
     </Resizable>
   );

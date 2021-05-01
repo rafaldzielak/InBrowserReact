@@ -11,22 +11,26 @@ const bundle = async (rawCode: string) => {
       wasmURL: "https://unpkg.com/esbuild-wasm@0.8.27/esbuild.wasm",
     });
   }
+  try {
+    const result = await service.build({
+      entryPoints: ["index.js"],
+      bundle: true,
+      write: false,
+      plugins: [unpkgPathPlugin(), fetchPlugin(rawCode)],
+      define: { "process.env.NODE_ENV": '"production"', global: "window" }, //double quotes replaces the value of NODE_ENV, not the parameter
+    });
+    console.log(result);
+    return { code: result.outputFiles[0].text, err: "" };
+  } catch (error) {
+    return { code: "", err: error.message };
+  }
 
-  const result = await service.build({
-    entryPoints: ["index.js"],
-    bundle: true,
-    write: false,
-    plugins: [unpkgPathPlugin(), fetchPlugin(rawCode)],
-    define: { "process.env.NODE_ENV": '"production"', global: "window" }, //double quotes replaces the value of NODE_ENV, not the parameter
-  });
-  console.log(result);
   // We do not want that:
   // try {
   //   eval(result.outputFiles[0].text);
   // } catch (error) {
   //   alert(error);
   // }
-  return result.outputFiles[0].text;
 };
 
 export default bundle;
