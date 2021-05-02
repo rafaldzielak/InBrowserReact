@@ -13,7 +13,7 @@ export interface DeleteCellAction {
 }
 export interface InserCellBeforeAction {
   type: ActionType.INSERT_CELL_BEFORE;
-  payload: { id: string; type: CellTypes };
+  payload: { id: string | null; type: CellTypes };
 }
 export interface UpdateCellAction {
   type: ActionType.UPDATE_CELL;

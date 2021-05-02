@@ -13,6 +13,6 @@ export const deleteCell = (id: string): DeleteCellAction => {
 export const moveCell = (id: string, direction: Direction): MoveCellAction => {
   return { type: ActionType.MOVE_CELL, payload: { id, direction } };
 };
-export const insertCellBefore = (id: string, type: CellTypes): InserCellBeforeAction => {
+export const insertCellBefore = (id: string | null, type: CellTypes): InserCellBeforeAction => {
   return { type: ActionType.INSERT_CELL_BEFORE, payload: { id, type } };
 };
