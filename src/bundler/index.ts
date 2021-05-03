@@ -18,8 +18,9 @@ const bundle = async (rawCode: string) => {
       write: false,
       plugins: [unpkgPathPlugin(), fetchPlugin(rawCode)],
       define: { "process.env.NODE_ENV": '"production"', global: "window" }, //double quotes replaces the value of NODE_ENV, not the parameter
+      jsxFactory: "_React.createElement",
+      jsxFragment: "_React.Fragment",
     });
-    console.log(result);
     return { code: result.outputFiles[0].text, err: "" };
   } catch (error) {
     return { code: "", err: error.message };
